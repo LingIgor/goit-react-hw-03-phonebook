@@ -55,6 +55,20 @@ export class App extends Component {
     });
   };
 
+
+  componentDidMount() {
+    const local = localStorage.getItem('try')
+    if(local) {this.setState({contacts: JSON.parse(local)})}
+    
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.contacts !== this.state.contacts) {
+      const localString = JSON.stringify(this.state.contacts)
+     localStorage.setItem('try', localString)
+    }
+  }
+
   render() {
     const {
       onHandleSubmit,
